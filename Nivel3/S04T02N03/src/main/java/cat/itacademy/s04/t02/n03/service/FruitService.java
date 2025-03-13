@@ -17,12 +17,12 @@ public class FruitService {
         this.fruitRepository = fruitRepository;
     }
 
-    public String add(Fruit fruit){
+    public Fruit add(Fruit fruit){
         if(fruit.getName().isEmpty()){
             throw new FruitNotFoundException("Error, nombre vacio.");
         }else{
             fruitRepository.save(fruit);
-            return "Fruta guardada con exito";
+            return fruit;
         }
     }
 
@@ -44,24 +44,23 @@ public class FruitService {
         }
     }
 
-    public String delete(String id){
+    public boolean delete(String id){
         Optional<Fruit> optionalFruit = fruitRepository.findById(id);
         if(optionalFruit.isPresent()){
             fruitRepository.deleteById(id);
-            return "Fruta eliminada con exito";
+            return true;
         }else{
             throw new FruitDoesntExistException("Error, no hay ninguna fruta con este id");
         }
     }
 
-    public String update(Fruit fruit, String id){
+    public Fruit update(Fruit fruit, String id){
         Optional<Fruit> optionalFruit = fruitRepository.findById(id);
         if(optionalFruit.isPresent()){
             Fruit fruitUpdate = optionalFruit.get();
             fruitUpdate.setName(fruit.getName());
             fruitUpdate.setQuantityKilos(fruit.getQuantityKilos());
-            fruitRepository.save(fruitUpdate);
-            return "Fruta actualizada con exito";
+            return fruitRepository.save(fruitUpdate);
         }else{
             throw new FruitDoesntExistException("Error, no hay ninguna fruta con este id");
         }
