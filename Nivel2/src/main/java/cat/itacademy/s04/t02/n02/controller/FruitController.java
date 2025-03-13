@@ -1,45 +1,55 @@
-package cat.itacademy.s04.t02.n02.controller;
+package cat.itacademy.s04.t02.n03.controller;
+
+import cat.itacademy.s04.t02.n03.service.FruitService;
+import org.springframework.http.ResponseEntity;
+import cat.itacademy.s04.t02.n03.model.Fruit;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import cat.itacademy.s04.t02.n02.model.Fruit;
-import cat.itacademy.s04.t02.n02.service.FruitService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/fruit")
 public class FruitController {
-
     private final FruitService fruitService;
 
-    @Autowired
-    public FruitController(FruitService fruitService) {
+    public FruitController(FruitService fruitService){
         this.fruitService = fruitService;
+
     }
 
     @PostMapping("/add")
-    public String addFruit(@RequestBody Fruit fruit) {
-        return fruitService.add(fruit);
+    public ResponseEntity<Fruit> addFruit(@RequestBody Fruit fruit){
+        Fruit createdFruit = fruitService.add(fruit);
+        return ResponseEntity.ok(createdFruit);
+
     }
 
     @GetMapping("/getAll")
-    public List<Fruit> getAllFruits(){
-        return fruitService.getAll();
+    public ResponseEntity<List<Fruit>> getAllFruits(){
+        List<Fruit> fruits = fruitService.getAll();
+        return ResponseEntity.ok(fruits);
     }
 
     @GetMapping("/getOne/{id}")
-    public Fruit getAllFruits(@PathVariable Long id){
-        return fruitService.getOne(id);
+    public ResponseEntity<Fruit> getOneFruit(@PathVariable String id){
+        Fruit fruit = fruitService.getOne(id);
+        return ResponseEntity.ok(fruit);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteFruit(@PathVariable Long id){
-        return fruitService.delete(id);
+    public ResponseEntity<Void> deleteFruit(@PathVariable String id){
+        boolean fruitDelete = fruitService.delete(id);
+        if (fruitDelete) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("/update/{id}")
-    public String updateFruit(@RequestBody Fruit fruit, @PathVariable Long id){
-        return fruitService.update(fruit, id);
+    public ResponseEntity<Fruit> updateFruit(@PathVariable String id, @RequestBody Fruit fruit){
+        Fruit updateFruit = fruitService.update(fruit, id);
+        return ResponseEntity.ok(updateFruit);
     }
 }
+
