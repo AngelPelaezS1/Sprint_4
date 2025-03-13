@@ -35,7 +35,7 @@ Para usar MySQL, asegúrate de que la base de datos está creada y configurada c
 spring.application.name=S04T02N02
 spring.datasource.url=jdbc:mysql://localhost:3306/fruit?serverTimezone=Europe/Madrid
 spring.datasource.username=root
-spring.datasource.password=
+spring.datasource.password=2345638721
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.jpa.hibernate.ddl-auto=update
 Si necesitas crear la base de datos en MySQL, usa estos comandos:
