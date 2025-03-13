@@ -32,26 +32,25 @@ El proyecto sigue el patrón MVC (Modelo-Vista-Controlador) y está estructurado
 ├── src
 │   ├── main
 │   │   ├── java
-│   │   │   └── cat
-│   │   │       └── itacademy
-│   │   │           └── s04
-│   │   │               └── t02
-│   │   │                   └── n03
-│   │   │                       ├── S04T02N03Application.java
-│   │   │                       ├── controller
-│   │   │                       │   └── FruitController.java
-│   │   │                       ├── exception
-│   │   │                       │   ├── FruitDoesntExistException.java
-│   │   │                       │   └── FruitNotFoundException.java
-│   │   │                       ├── model
-│   │   │                       │   └── Fruit.java
-│   │   │                       ├── repository
-│   │   │                       │   └── FruitRepository.java
-│   │   │                       └── service
-│   │   │                           └── FruitService.java
-│   │   └── resources
-│   │       ├── application.properties
-```
+│   │     └── cat
+│   │         └── itacademy
+│   │            └── s04
+│   │                  └── t02
+│   │                     └── n03
+│   │                          ├── S04T02N03Application.java
+│   │                          ├── controller
+│   │                          │   └── FruitController.java
+│   │                          ├── exception
+│   │                          │   ├── FruitDoesntExistException.java
+│   │                          │   └── FruitNotFoundException.java
+│   │                          ├── model
+│   │                          │   └── Fruit.java
+│   │                          ├── repository
+│   │                          │   └── FruitRepository.java
+│   │                          └── service
+│   │                              └── FruitService.java
+│   │   
+│   │       
 
 ## 🚀 Endpoints disponibles
 | Método HTTP | Endpoint                 | Descripción                         |
