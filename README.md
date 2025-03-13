@@ -1,78 +1,92 @@
-🥭 CRUD de Frutas con Spring Boot
+# CRUD con Spring Boot, H2, MySQL y MongoDB
 
-Este proyecto implementa una API REST para la gestión de frutas utilizando Spring Boot y diferentes bases de datos. Se divide en tres niveles:
+## Descripción
+Este repositorio contiene un proyecto de Spring Boot que implementa una API RESTful para la gestión de una entidad `Fruit`. La aplicación está dividida en tres niveles, cada uno utilizando una base de datos diferente:
 
-📌 Niveles del Proyecto
+- **Nivel 1**: Persistencia en H2 (base de datos en memoria).
+- **Nivel 2**: Persistencia en MySQL.
+- **Nivel 3**: Persistencia en MongoDB.
 
-🏆 Nivel 1 - Base de datos en memoria H2.
-🏆 Nivel 2 - Base de datos relacional MySQL.
-🏆 Nivel 3 - Base de datos NoSQL MongoDB.
-📂 Estructura del Proyecto
+El proyecto sigue el patrón MVC (Modelo-Vista-Controlador) y está estructurado en diferentes paquetes según su funcionalidad.
 
-src
-│── main
-│   ├── java
-│   │   └── cat.itacademy.s04.t02.n01
-│   │       ├── controller      # Controladores REST
-│   │       ├── exception       # Manejadores de excepciones
-│   │       ├── model           # Clases de modelo (entidades)
-│   │       ├── repository      # Interfaces de repositorio
-│   │       ├── services        # Lógica de negocio
-│   │       └── S04T02N01Application.java  # Clase principal
-│   ├── resources
-│   │   ├── application.properties  # Configuración
-│   │   ├── static                  # Archivos estáticos
-│   │   └── templates               # Plantillas Thymeleaf (si aplica)
-🚀 Instalación y Configuración
+## 📌 Contenido
+### 🏆 Nivel 1 - Spring Boot con H2
+- Creación de un proyecto Spring Boot con Maven.
+- Implementación de una API REST para la entidad `Fruit`.
+- Persistencia de datos en una base de datos en memoria H2.
+- Configuración de la conexión en `application.properties`.
+- Implementación de un `GlobalExceptionHandler` para la gestión de errores.
 
-🏆 Nivel 1 - Base de datos H2 (En memoria)
-Este nivel no requiere configuración adicional de base de datos. En application.properties solo es necesario definir el nombre de la aplicación:
+### 🏆 Nivel 2 - Spring Boot con MySQL
+- Adaptación del proyecto del Nivel 1 para persistencia en MySQL.
+- Configuración del acceso a la base de datos en `application.properties`.
+- Mismas funcionalidades que en el Nivel 1, pero con una base de datos MySQL.
 
-spring.application.name=S04T02N01
-🏆 Nivel 2 - Base de datos MySQL
-Para usar MySQL, asegúrate de que la base de datos está creada y configurada correctamente. Luego, usa la siguiente configuración en application.properties:
+### 🏆 Nivel 3 - Spring Boot con MongoDB
+- Adaptación del proyecto para utilizar MongoDB en lugar de una base de datos relacional.
+- Uso de Spring Data MongoDB para gestionar la persistencia.
+- Configuración de la conexión en `application.properties`.
 
-spring.application.name=S04T02N02
-spring.datasource.url=jdbc:mysql://localhost:3306/fruit?serverTimezone=Europe/Madrid
-spring.datasource.username=root
-spring.datasource.password=2345638721
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.jpa.hibernate.ddl-auto=update
-Si necesitas crear la base de datos en MySQL, usa estos comandos:
+## 📂 Estructura del proyecto
+```
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── cat
+│   │   │       └── itacademy
+│   │   │           └── s04
+│   │   │               └── t02
+│   │   │                   └── n03
+│   │   │                       ├── S04T02N03Application.java
+│   │   │                       ├── controller
+│   │   │                       │   └── FruitController.java
+│   │   │                       ├── exception
+│   │   │                       │   ├── FruitDoesntExistException.java
+│   │   │                       │   └── FruitNotFoundException.java
+│   │   │                       ├── model
+│   │   │                       │   └── Fruit.java
+│   │   │                       ├── repository
+│   │   │                       │   └── FruitRepository.java
+│   │   │                       └── service
+│   │   │                           └── FruitService.java
+│   │   └── resources
+│   │       ├── application.properties
+```
 
-CREATE DATABASE fruit;
-USE fruit;
-🏆 Nivel 3 - Base de datos MongoDB
-Para utilizar MongoDB, asegúrate de que el servidor esté corriendo y configura application.properties de la siguiente manera:
+## 🚀 Endpoints disponibles
+| Método HTTP | Endpoint                 | Descripción                         |
+|------------|-------------------------|-------------------------------------|
+| POST       | `/fruita/add`            | Agrega una nueva fruta             |
+| PUT        | `/fruita/update`         | Actualiza una fruta existente      |
+| DELETE     | `/fruita/delete/{id}`    | Elimina una fruta por su ID        |
+| GET        | `/fruita/getOne/{id}`    | Obtiene una fruta por su ID        |
+| GET        | `/fruita/getAll`         | Obtiene todas las frutas           |
 
-spring.application.name=S04T02N03
-spring.data.mongodb.uri=mongodb://localhost:27017/fruitdb
-Si estás usando Docker, puedes levantar MongoDB con:
+## ⚠️ Manejo de excepciones
+Se ha implementado un `GlobalExceptionHandler` para gestionar errores de manera centralizada y garantizar respuestas adecuadas ante fallos.
 
-docker run -d -p 27017:27017 --name mongo_container mongo
-📌 Endpoints Disponibles
+## 🔧 Configuración de bases de datos
+- **H2**: Configuración en `application.properties` sin instalación adicional.
+- **MySQL**: Requiere configuración de credenciales en `application.properties`.
+- **MongoDB**: Necesita un servidor en ejecución y configuración en `application.properties`.
 
-Método HTTP	Endpoint	Descripción
-POST	/fruita/add	Agregar una nueva fruta
-PUT	/fruita/update/{id}	Actualizar una fruta existente
-DELETE	/fruita/delete/{id}	Eliminar una fruta por ID
-GET	/fruita/getOne/{id}	Obtener una fruta por ID
-GET	/fruita/getAll	Obtener todas las frutas
-🛠 Cómo Ejecutar el Proyecto
+## 📖 Instalación y ejecución
+1️⃣ Clonar el repositorio:
+   ```bash
+   git clone <URL_DEL_REPOSITORIO>
+   ```
+2️⃣ Entrar en la carpeta del proyecto:
+   ```bash
+   cd S04T02N03
+   ```
+3️⃣ Ejecutar la aplicación con Maven:
+   ```bash
+   mvn spring-boot:run
+   ```
+4️⃣ Acceder a los endpoints en `http://localhost:8080/fruita/`
 
-1️⃣ Clonar el repositorio
-git clone https://github.com/tu-usuario/tu-repositorio.git
-cd tu-repositorio
-2️⃣ Construir el proyecto con Maven
-mvn clean package
-3️⃣ Ejecutar la aplicación
-mvn spring-boot:run
-4️⃣ Probar los endpoints con Postman o cURL
-📚 Recursos de Apoyo
+## 📚 Recursos utilizados
+1. [Spring Boot Documentation](https://spring.io/projects/spring-boot)
+2. [Guía de Spring Data JPA](https://spring.io/guides/gs/accessing-data-jpa)
+3. [Guía de Spring Data MongoDB](https://spring.io/guides/gs/accessing-data-mongodb)
 
-Spring Boot Reference Guide
-Spring Data JPA
-Spring Data MongoDB
-📜 Licencia
-
-Este proyecto está bajo la licencia MIT. ¡Siéntete libre de contribuir y mejorar!
