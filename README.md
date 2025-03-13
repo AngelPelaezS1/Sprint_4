@@ -56,7 +56,7 @@ El proyecto sigue el patrón MVC (Modelo-Vista-Controlador) y está estructurado
 | Método HTTP | Endpoint                 | Descripción                         |
 |------------|-------------------------|-------------------------------------|
 | POST       | `/fruita/add`            | Agrega una nueva fruta             |
-| PUT        | `/fruita/update`         | Actualiza una fruta existente      |
+| PUT        | `/fruita/update/{id}`         | Actualiza una fruta existente      |
 | DELETE     | `/fruita/delete/{id}`    | Elimina una fruta por su ID        |
 | GET        | `/fruita/getOne/{id}`    | Obtiene una fruta por su ID        |
 | GET        | `/fruita/getAll`         | Obtiene todas las frutas           |
